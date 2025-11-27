@@ -1,695 +1,623 @@
-# Clase 1: Clases, Objetos, Constructores y Encapsulamiento
+# Clase 3: Modelado Avanzado de Clases en POO
 
-¡Bienvenido al Módulo 2 y al fascinante mundo de la Programación Orientada a Objetos (POO)!
-
-La POO es un paradigma fundamental en Java que te permitirá modelar problemas de una manera más cercana a cómo pensamos sobre el mundo real.
-
-![Pensando en objetos](https://ferestrepoca.github.io/paradigmas-de-programacion/poo/poo_teoria/images/poo.png)
+¡Bienvenido a la tercera clase del Módulo 2! Ya sabes crear clases, objetos, usar herencia y polimorfismo. Ahora, vamos a profundizar en cómo las clases interactúan y se relacionan entre sí para construir sistemas más complejos y realistas. Aprenderás a modelar relaciones como "tiene un" de diferentes maneras y a usar la abstracción de forma más estratégica. También introduciremos una estructura de datos fundamental: los Arrays, que nos ayudarán a manejar colecciones de objetos en nuestras relaciones.
 
 ## Objetivos de Aprendizaje
 
 Al finalizar esta clase, serás capaz de:
 
-- Comprender la diferencia y relación entre **clases** y **objetos**.
-- Definir el **estado** (atributos) y el **comportamiento** (métodos) de una clase.
-- Crear objetos a partir de una clase utilizando **constructores**.
-- Aplicar el principio de **encapsulamiento** para proteger los datos de tus objetos.
-- Utilizar **getters** y **setters** para interactuar con los atributos encapsulados.
-- Crear y manipular objetos encapsulados en un ejercicio práctico.
-- Conocer los principios fundamentales de la Programación Orientada a Objetos.
+- Utilizar **Arrays** para almacenar colecciones de datos del mismo tipo.
+- Comprender y modelar diferentes tipos de relaciones entre clases: **Asociación**, **Composición** y **Agregación**, representando colecciones de objetos con Arrays.
+- Implementar relaciones bidireccionales simples en tu código.
+- Utilizar **clases abstractas** y **métodos abstractos** para definir plantillas con comportamiento incompleto.
+- Consolidar la comprensión de las diferencias y usos de **clases abstractas** e **interfaces**.
+- Aplicar estos conceptos de modelado avanzado en un ejercicio práctico de diseño de sistema.
 
-## 1. Clases y Objetos: Los Fundamentos de la POO
+## 1. Introducción a Arrays: Colecciones Simples y de Tamaño Fijo
 
-La Programación Orientada a Objetos se basa en dos conceptos principales: **clases** y **objetos**.
+Hasta ahora, hemos trabajado con variables individuales para almacenar datos u objetos. Pero, ¿qué pasa si necesitas almacenar varios valores del mismo tipo, como las notas de un estudiante o una lista de productos en un pedido? Para eso usamos estructuras de datos. La estructura de datos más básica en Java es el **Array**.
 
-![Clases y Objetos](assets/clase_objeto.png)
+### 1.1. ¿Qué es un Array?
 
-- **Clase**: Una clase es como un **plano**, una **plantilla** o un **molde** para crear objetos. Define las características (atributos) y las acciones (métodos) que todos los objetos de ese tipo tendrán. No es un objeto en sí misma, sino la descripción de cómo deben ser los objetos de esa categoría.
+Un **Array** es un contenedor que almacena una secuencia ordenada de elementos del mismo tipo. Una vez que se crea un array, su **tamaño es fijo**; no puedes cambiar cuántos elementos puede contener.
 
-    ![Clase Carro](https://compu2poo.wordpress.com/wp-content/uploads/2013/11/obeto.png)
+![Estructura de dato Array](assets/arrays.png)
 
-- La clase `Carro` define que todos los carros tendrán un color, una marca, una velocidad, etc., y podrán arrancar, acelerar, etc.
+### 1.2. Declaración
 
-    ```mermaid
-    classDiagram
-        class Carro {
-            String color
-            String marca
-            double velocidad
-            void arrancar()
-            void acelerar()
-        }
-    ```
-
-- La clase `Perro` define que todos los perros tendrán una raza, un nombre, etc., y podrán ladrar, correr, etc.
-
-    ```mermaid
-    classDiagram
-    class Perro {
-        String raza
-        String nombre
-        void ladrar()
-        void correr()
-    }
-    ```
-
-- **Objeto**: En el mundo real, un objeto es cualquier entidad que tiene **características** (estado) y puede realizar **acciones** (comportamiento). Por ejemplo:
-  - Un **carro**: Características (color, marca, modelo, velocidad actual), Acciones (arrancar, acelerar, frenar, girar).
-  - Un **perro**: Características (raza, nombre, edad, color de pelo), Acciones (ladrar, correr, comer, dormir).
-  - Una **persona**: Características (nombre, edad, altura, color de ojos), Acciones (caminar, hablar, comer, trabajar).
-
-  En programación, un **objeto** es una instancia concreta de una clase. Es una "cosa" que existe en la memoria de tu computadora y tiene un estado (valores en sus atributos) y puede realizar acciones (ejecutar sus métodos).
-
-  ![Objetos de Carro](https://img.remediosdigitales.com/e14a76/autos-mas-vendidos-mexico/1366_2000.jpg)
-
-  ![Objetos de Perro](https://cdn.wamiz.fr/cdn-cgi/image/format=auto,quality=80,width=664,height=373.5,fit=cover/article/main-picture/616c8a1295e55611964743.jpg)
-
-- **Relación Clase-Objeto**: La clase es la definición abstracta; el objeto es la materialización concreta de esa definición. Puedes crear muchos objetos a partir de una sola clase, y cada objeto tendrá su propio estado independiente.
-
-  ```mermaid
-  graph TD
-      A[Clase Carro] --> B(Objeto miCarro);
-      A --> C(Objeto otroCarro);
-      B -- "color: rojo\nvelocidad: 50" --> D(Estado);
-      B -- "acelerar()\nfrenar()" --> E(Comportamiento);
-      C -- "color: azul\nvelocidad: 0" --> F(Estado);
-      C -- "acelerar()\nfrenar()" --> G(Comportamiento);
-  ```
-
-  ![Clase Caballo](https://eaddfsi.wordpress.com/wp-content/uploads/2009/06/objetos.png)
-
-En Java, defines una clase usando la palabra clave `class`:
+Dices el tipo de dato de los elementos seguido de corchetes `[ ]` y el nombre del array.
 
 ```Java
-public class NombreDeMiClase {
-    // Aquí van los atributos (variables)
-    // Aquí van los métodos (funciones)
-}
+int[] ages; // Declaración de un array de enteros
+String[] names; // Declaración de un array de cadenas de texto
+double[] prices; // Declaración de un array de números decimales
 ```
 
-Por convención, los nombres de las clases en Java se escriben en `PascalCase` o `UperCamelCase` (la primera letra de cada palabra en mayúscula, sin espacios).
+### 1.3. Inicialización (Creación)
 
-## 2. Los Pilares de la Programación Orientada a Objetos
-
-La POO se sustenta en cuatro **principios fundamentales** (**pilares**) que guían el diseño y la estructura del código. En esta clase, nos enfocaremos en el primero (Encapsulamiento), y en las próximas clases exploraremos los demás en detalle.
-
-1. **Encapsulamiento**: Consiste en agrupar los datos (atributos) y los métodos que operan sobre ellos en una sola unidad (la clase), y **ocultar los detalles internos** del objeto, exponiendo solo lo necesario a través de una interfaz pública (métodos). Esto protege los datos y controla su acceso.
-2. **Abstracción**: Se enfoca en mostrar solo las características esenciales de un objeto y ocultar los detalles complejos de su implementación. Es como usar un control remoto: no necesitas saber cómo funciona internamente, solo qué botones presionar para cambiar de canal o subir el volumen. Creamos clases que representan conceptos del mundo real de forma simplificada.
-3. **Herencia**: Permite que una nueva clase (subclase o clase hija) herede atributos y métodos de una clase existente (superclase o clase padre). Esto fomenta la reutilización de código y establece relaciones "es un tipo de" (ej. Un `Perro` es un tipo de `Animal`).
-4. **Polimorfismo**: Significa "_muchas formas_". Permite que objetos de diferentes clases respondan al mismo mensaje (llamada a método) de maneras diferentes, según su tipo específico. Es como tener un botón "Reproducir" en diferentes dispositivos (un reproductor de música, un reproductor de video); la acción es la misma, pero la implementación interna varía.
-
-Estos principios trabajan juntos para crear código más organizado, flexible, reutilizable y fácil de mantener.
-
-## 3. Atributos y Métodos: Definiendo el Estado y Comportamiento
-
-Dentro de una clase, defines los atributos y los métodos que tendrán los objetos creados a partir de ella.
-
-- **Atributos**: Son variables que representan las **características** o el **estado** de un objeto. Se declaran dentro de la clase, pero fuera de cualquier método (variables de instancia). Cada objeto creado a partir de la clase tendrá su propia copia de estos atributos.
-
-  ```Java
-  public class Perro {
-      // Atributos
-      String raza;
-      String nombre;
-      int edad;
-      String colorPelo;
-  }
-  ```
-
-- **Métodos**: Son las funciones (que ya vimos en el Módulo 1) que definen el **comportamiento** o las **acciones** que un objeto puede realizar. Se declaran dentro de la clase. Los métodos de un objeto pueden acceder y modificar los atributos de ese objeto.
-
-  ```Java
-  public class Perro {
-      // Atributos
-      String raza;
-      String nombre;
-      int edad;
-      String colorPelo;
-
-      // Métodos
-      public void ladrar() {
-          System.out.println("¡Guau guau!");
-      }
-
-      public void comer(String comida) {
-          System.out.println(nombre + " está comiendo " + comida + ".");
-      }
-
-      public String obtenerNombre() {
-          return nombre; // Un método puede acceder a los atributos
-      }
-  }
-  ```
-
-  Nota que los métodos asociados a objetos (no `static`) no necesitan recibir el objeto como parámetro; pueden acceder directamente a sus propios atributos (nombre en el ejemplo comer y obtenerNombre).
-
-## 4. Constructores: Dando Vida a los Objetos
-
-Un **constructor** es un tipo especial de método que se utiliza para **crear** (**instanciar**) objetos de una clase e inicializar sus atributos. Se llama automáticamente cuando usas la palabra clave `new`.
-
-- Un constructor tiene el **mismo nombre que la clase**.
-- Un constructor **no tiene tipo de retorno**, ni siquiera `void`.
+Usas la palabra clave `new` y especificas el tamaño del array.
 
 ```Java
-public class Perro {
-    String raza;
-    String nombre;
-    int edad;
-    String colorPelo;
-
-    // Constructor (tiene el mismo nombre que la clase y no tiene retorno)
-    public Perro() {
-        System.out.println("Se ha creado un nuevo perro.");
-        // Aquí podrías inicializar atributos con valores por defecto si quisieras
-        this.raza = "Mestizo";
-        this.edad = 0;
-    }
-
-    // ... otros métodos ...
-}
+int[] ages = new int[5]; // Crea un array de 5 enteros. Inicializados a 0.
+String[] names = new String[3]; // Crea un array de 3 Strings. Inicializados a null.
+double[] prices = new double[10]; // Crea un array de 10 doubles. Inicializados a 0.0.
 ```
 
-### 4.1. Constructor por Defecto
+Cuando creas un array con `new` y un tamaño, los elementos se inicializan automáticamente con valores por defecto: `0` para tipos numéricos, `false` para booleanos, y `null` para tipos de referencia (objetos).
 
-Si no defines _ningún_ constructor en tu clase, Java automáticamente proporciona un **constructor por defecto** (sin parámetros) que inicializa los atributos con valores predeterminados (0 para tipos numéricos, `null` para objetos, `false` para booleanos).
+### 1.4. Inicialización Directa
 
-### 4.2. Constructores Parametrizados
-
-Puedes definir tus propios constructores que acepten **parámetros**. Esto te permite inicializar los atributos del objeto con valores específicos en el momento de su creación.
+Puedes declarar e inicializar un array con valores específicos en una sola línea. El tamaño del array se determina automáticamente por el número de valores proporcionados.
 
 ```Java
-public class Perro {
-    String raza;
-    String nombre;
-    int edad;
-    String colorPelo;
+int[] scores = {85, 92, 78, 95}; // Crea un array de 4 enteros con estos valores
+String[] colors = {"Red", "Green", "Blue"}; // Crea un array de 3 Strings
 
-    // Constructor por defecto (si no defines otro, Java lo crea)
-    // public Perro() { ... } // Java lo crea si no hay otros
-
-    // Constructor Parametrizado
-    // Recibe valores para inicializar los atributos
-    public Perro(String raza, String nombre, int edad, String colorPelo) {
-        // Uso de 'this.': Se refiere al atributo de la instancia actual
-        // Esto es necesario cuando el parámetro tiene el mismo nombre que el atributo
-        this.raza = raza;
-        this.nombre = nombre;
-        this.edad = edad;
-        this.colorPelo = colorPelo;
-        System.out.println("Se ha creado un perro llamado " + this.nombre + ".");
-    }
-
-    // ... otros métodos ...
-}
+// El tamaño de 'scores' es 4, el tamaño de 'colors' es 3
 ```
 
-Si defines _cualquier_ constructor (parametrizado o no), Java **ya no proporciona** el constructor por defecto automáticamente. Si quieres tener ambos (uno sin parámetros y uno con parámetros), debes definirlos explícitamente.
+### 1.5. Acceso a Elementos
 
-### 4.3. La Palabra Clave `this`
-
-La palabra clave `this` en Java se refiere a la **instancia actual** del objeto. Es decir, dentro de un método o constructor de una clase, `this` representa al objeto específico sobre el cual se está operando en ese momento.
-
-Sus usos más comunes son:
-
-1. **Para diferenciar entre atributos de instancia y parámetros/variables locales con el mismo nombre**: Este es el uso más frecuente, especialmente en constructores y setters. Si un parámetro de un método o constructor tiene el mismo nombre que un atributo de la clase, puedes usar `this.nombreAtributo` para referirte al atributo de la instancia, y simplemente `nombreParametro` para referirte al parámetro.
-
-    ```Java
-    public class EjemploThis {
-        private String nombre; // Atributo de instancia
-
-        // Constructor con un parámetro llamado 'nombre'
-        public EjemploThis(String nombre) {
-            // Sin 'this.nombre', Java asumiría que te refieres al parámetro 'nombre' en ambos lados
-            this.nombre = nombre; // Asigna el valor del parámetro 'nombre' al atributo de instancia 'this.nombre'
-        }
-
-        // Setter con un parámetro llamado 'nombre'
-        public void setNombre(String nombre) {
-            this.nombre = nombre; // Asigna el valor del parámetro 'nombre' al atributo de instancia 'this.nombre'
-        }
-
-        public String getNombre() {
-            return this.nombre; // También puedes usar 'this' aquí, aunque no es estrictamente necesario si no hay ambigüedad
-        }
-
-        public void imprimirNombre() {
-            String nombre = "Variable local"; // Variable local con el mismo nombre
-            System.out.println("Variable local: " + nombre); // Se refiere a la variable local
-            System.out.println("Atributo de instancia: " + this.nombre); // Se refiere al atributo de la instancia
-        }
-
-        public static void main(String[] args) {
-            EjemploThis obj = new EjemploThis("Nombre del Objeto");
-            obj.imprimirNombre();
-            // Salida:
-            // Variable local: Variable local
-            // Atributo de instancia: Nombre del Objeto
-        }
-    }
-    ```
-
-2. **Para llamar a otro constructor de la misma clase**: Puedes usar `this(...)` dentro de un constructor para llamar a otro constructor de la misma clase (conocido como encadenamiento de constructores). Esto es útil para evitar duplicar código de inicialización. La llamada a `this(...)` debe ser la primera sentencia dentro del constructor.
-
-    ```Java
-    public class Persona {
-        private String nombre;
-        private int edad;
-
-        // Constructor principal
-        public Persona(String nombre, int edad) {
-            this.nombre = nombre;
-            this.edad = edad;
-        }
-
-        // Constructor secundario que solo recibe el nombre
-        public Persona(String nombre) {
-            // Llama al constructor principal, pasando el nombre recibido y una edad por defecto
-            this(nombre, 0);
-            // Cualquier otro código iría aquí, después de la llamada a this(...)
-            System.out.println("Objeto Persona creado solo con nombre.");
-        }
-
-        public String getNombre() { return this.nombre; }
-        public int getEdad() { return this.edad; }
-
-        public static void main(String[] args) {
-            Persona p1 = new Persona("Ana", 25); // Llama al constructor(String, int)
-            System.out.println(p1.getNombre() + " - " + p1.getEdad()); // Ana - 25
-
-            Persona p2 = new Persona("Juan"); // Llama al constructor(String)
-            System.out.println(p2.getNombre() + " - " + p2.getEdad()); // Juan - 0
-        }
-    }
-    ```
-
-3. **Para pasar la instancia actual como argumento a otro método**: Menos común al inicio, pero `this` puede usarse para pasar el objeto actual a otro método.
-
-En resumen, `this` es una referencia al objeto actual y es crucial para desambiguar nombres y para la comunicación entre constructores.
-
-### 4.4. Creando Objetos (`new`)
-
-Para crear un objeto (una **instancia**) de una clase, usas la palabra clave `new` seguida de una llamada a uno de los constructores de la clase.
+Los elementos de un array se acceden utilizando un índice numérico encerrado entre corchetes `[]`. Los índices de un array siempre comienzan en `0`.
 
 ```Java
-public class EjemploCreacionObjetos {
-    public static void main(String[] args) {
-        // Creamos un objeto Perro usando el constructor por defecto (si existe)
-        // Perro miPrimerPerro = new Perro(); // Llama al constructor Perro()
+int[] numbers = {10, 20, 30, 40};
 
-        // Creamos un objeto Perro usando el constructor parametrizado
-        Perro miPerro = new Perro("Labrador", "Buddy", 3, "Dorado"); // Llama al constructor Perro(String, String, int, String)
+System.out.println("Primer elemento: " + numbers[0]); // Salida: Primer elemento: 10
+System.out.println("Tercer elemento: " + numbers[2]); // Salida: Tercer elemento: 30
 
-        // Creamos otro objeto Perro
-        Perro otroPerro = new Perro("Poodle", "Max", 5, "Blanco"); // Otro objeto independiente
+numbers[1] = 25; // Modifica el segundo elemento (índice 1)
+System.out.println("Segundo elemento modificado: " + numbers[1]); // Salida: Segundo elemento modificado: 25
+```
 
-        // Cada objeto tiene su propio estado
-        // System.out.println(miPerro.nombre); // Esto podría dar error si nombre es privado (¡lo veremos pronto!)
-        // System.out.println(otroPerro.nombre);
+### 1.6. Longitud del Array
 
-        // miPerro.ladrar(); // Buddy ladra
-        // otroPerro.comer("croquetas"); // Max come croquetas
+Puedes obtener el número de elementos en un array usando el atributo `.length`.
+
+```Java
+int[] data = {1, 2, 3, 4, 5};
+System.out.println("Tamaño del array: " + data.length); // Salida: Tamaño del array: 5
+
+// El último índice válido es length - 1
+System.out.println("Último elemento: " + data[data.length - 1]); // Salida: Último elemento: 5
+```
+
+### 1.7. El error (excepción) `ArrayIndexOutOfBoundsException`
+
+Es un error común. Ocurre cuando intentas acceder a un elemento usando un índice que está fuera del rango válido (menor que `0` o mayor o igual a `length`).
+
+```Java
+int[] smallArray = new int[2]; // Índices válidos: 0 y 1
+System.out.println(smallArray[2]); // Esto causaría un ArrayIndexOutOfBoundsException
+```
+
+### 1.8. Arrays de Objetos
+
+Puedes crear arrays para almacenar referencias a objetos.
+
+```Java
+// Asumiendo que tienes una clase Dog
+Dog[] dogs = new Dog[4]; // Crea un array para 4 referencias a objetos Dog (inicializadas a null)
+
+dogs[0] = new Dog("Buddy"); // Crea un objeto Dog y lo asigna al primer elemento
+dogs[1] = new Dog("Max");
+
+System.out.println(dogs[0].getName()); // Accede a un método del objeto en el array
+System.out.println(dogs[2]); // Salida: null (el tercer elemento no ha sido inicializado con un objeto)
+```
+
+Es importante recordar que el array solo almacena las _referencias_. Debes crear los objetos individualmente y asignarlos a las posiciones del array.
+
+### 1.9. Arrays Multidimensionales
+
+A veces necesitas representar datos en forma de tabla, matriz o cuadrícula (por ejemplo, un tablero de ajedrez, una hoja de cálculo o una matriz matemática). Para esto, Java permite crear **arrays multidimensionales**. El más común es el array de dos dimensiones (matriz).
+
+![Array multidimencionales](assets/arrays_multidimencional.png)
+
+#### Declaración e Inicialización
+
+Un array de dos dimensiones se declara usando dos pares de corchetes:
+
+```Java
+int[][] matrix; // Declaración de un array de dos dimensiones de enteros
+```
+
+Para crearlo e inicializarlo con un tamaño específico:
+
+```Java
+int[][] matrix = new int[3][4]; // 3 filas, 4 columnas
+```
+
+Esto crea una “tabla” de 3 filas y 4 columnas, donde cada elemento es un int inicializado a 0.
+
+#### Acceso a Elementos
+
+Para acceder o modificar un elemento, usas dos índices: el primero para la fila y el segundo para la columna.
+
+```Java
+matrix[0][2] = 7; // Asigna el valor 7 a la fila 0, columna 2
+System.out.println(matrix[0][2]); // Imprime: 7
+```
+
+#### Inicialización Directa
+
+Puedes inicializar un array de dos dimensiones con valores específicos:
+
+```Java
+int[][] board = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+// board[1][2] es 6
+```
+
+#### Arrays de Más Dimensiones
+
+Java permite arrays de más dimensiones (ejemplo: `int[][][]`), pero en la práctica, los de dos dimensiones son los más usados.
+
+#### Ejemplo Práctico
+
+Supón que quieres almacenar las calificaciones de 3 estudiantes en 4 materias:
+
+```Java
+int[][] grades = new int[3][4]; // 3 estudiantes, 4 materias cada uno
+
+grades[0][0] = 85; // Primer estudiante, primera materia
+grades[2][3] = 90; // Tercer estudiante, cuarta materia
+```
+
+#### Recorrido de un Array Bidimensional
+
+Puedes usar bucles anidados para recorrer todos los elementos:
+
+```Java
+for (int i = 0; i < grades.length; i++) { // Filas
+    for (int j = 0; j < grades[i].length; j++) { // Columnas
+        System.out.println("Estudiante " + i + ", Materia " + j + ": " + grades[i][j]);
     }
 }
 ```
 
-Cuando creas un objeto, le asignas una **referencia** a una variable (ej. `miPerro`, `otroPerro`). Esta variable no contiene el objeto en sí, sino la dirección en memoria donde se encuentra el objeto.
+> **Nota:** Los arrays multidimensionales en Java son realmente arrays de arrays, por lo que las filas pueden tener diferentes longitudes si lo deseas (arrays “irregulares” o “jagged”).
 
-## 5. Encapsulamiento: Protegiendo tus Datos
+## 2. Relaciones Avanzadas entre Clases: Cómo los Objetos Interactúan
 
-El **encapsulamiento** es uno de los principios fundamentales de la POO. Consiste en agrupar los datos (atributos) y los métodos que operan sobre esos datos dentro de una única unidad (la clase), y **restringir el acceso directo** a los atributos desde fuera de la clase.
+Ahora que conocemos los Arrays, podemos modelar relaciones "tiene un" donde un objeto "todo" tiene _múltiples_ objetos "parte".
 
-**¿Por qué encapsular?**
+### 2.1. Asociación
 
-- **Control y Validación**: Puedes controlar cómo se acceden o modifican los datos. Por ejemplo, puedes evitar que se asigne una edad negativa a un objeto `Persona`.
-- **Protección de Integridad**: Evita que otras partes del programa modifiquen los datos de un objeto de forma inesperada o incorrecta.
-- **Flexibilidad**: Puedes cambiar la implementación interna de la clase (cómo almacenas o calculas algo) sin afectar el código que usa la clase, siempre y cuando la forma de interactuar (los métodos públicos) no cambie.
+Una clase conoce o utiliza a otra. Ahora, una clase puede tener un Array de referencias a objetos de otra clase.
 
-El encapsulamiento se logra principalmente utilizando **modificadores de acceso** para controlar la visibilidad de los atributos y métodos.
-
-### 5.1. Modificadores de Acceso (Visibilidad)
-
-Especifican desde dónde se puede acceder a los miembros de una clase (atributos o métodos).
-
-- `public`: El miembro es accesible desde **cualquier otra clase**. Se usa típicamente para los métodos que definen la interfaz pública de la clase (lo que el objeto "expone" al mundo exterior).
-- `private`: El miembro es accesible **únicamente dentro de la misma clase**. Se usa típicamente para los atributos para protegerlos del acceso directo externo.
-- `protected`: (Lo veremos en detalle en Herencia) Accesible dentro de la misma clase, clases del mismo paquete y subclases.
-- **(default o package-private)**: Si no especificas ningún modificador, el miembro es accesible dentro de la misma clase y todas las demás clases en el **mismo paquete**.
-
-### 5.2. Getters y Setters (Convención JavaBeans / POJO)
-
-Para permitir que otras clases interactúen con los atributos privados de un objeto de manera controlada, se utilizan métodos públicos especiales llamados **getters** y **setters**. Esta es una convención estándar en Java, especialmente para las clases que representan datos (conocidas como POJO - Plain Old Java Object, o JavaBeans en contextos más antiguos).
-
-- **Getters (Métodos de Acceso)**: Métodos públicos que permiten **obtener** el valor de un atributo privado.
-  
-  **Nomenclatura**: `public tipoDato getNombreAtributo()`. Para atributos booleanos, a menudo se usa `public boolean isNombreAtributo()`.
-
-  ```Java
-  public class Perro {
-      private String nombre; // Atributo privado
-
-      // ... constructor ...
-
-      // Getter para el nombre
-      public String getNombre() {
-          return this.nombre; // Accede al atributo privado desde dentro de la clase
-      }
-
-      // ... otros atributos y métodos ...
-  }
-  ```
-
-- **Setters (Métodos de Modificación)**: Métodos públicos que permiten **modificar** el valor de un atributo privado. A menudo incluyen lógica de validación.
-
-  **Nomenclatura**: `public void setNombreAtributo(tipoDato nuevoValor)`.
-
-  ```Java
-  public class Perro {
-      private int edad; // Atributo privado
-
-      // ... constructor ...
-
-      // Setter para la edad con validación
-      public void setEdad(int edad) {
-          if (edad >= 0) { // Validación simple
-              this.edad = edad; // Asigna el valor solo si es válido
-          } else {
-              System.out.println("Error: La edad no puede ser negativa.");
-          }
-      }
-
-      // Getter para la edad
-      public int getEdad() {
-          return this.edad;
-      }
-
-      // ... otros atributos y métodos ...
-  }
-  ```
-
-**Ejemplo Completo con Encapsulamiento**:
+![Asociación](assets/asociacion.png)
 
 ```Java
-public class Persona {
-    private String nombre; // Atributos privados
-    private int edad;
+public class Student {
+    private String name;
+    private Course[] enrolledCourses; // Student HAS Courses (Association using Array)
 
-    // Constructor
-    public Persona(String nombre, int edad) {
-        this.nombre = nombre;
-        // Usamos el setter para inicializar la edad, aplicando la validación desde el inicio
-        setEdad(edad);
+    public Student(String name, Course[] enrolledCourses) {
+        this.name = name;
+        this.enrolledCourses = enrolledCourses; // Asigna el array de cursos
     }
 
-    // Getter para nombre
-    public String getNombre() {
-        return this.nombre;
+    public void displayCourses() {
+        System.out.println("Cursos de " + this.name + ":");
+        // Iterar sobre el array (veremos bucles en detalle en M1)
+        for (int i = 0; i < enrolledCourses.length; i++) {
+            System.out.println("- " + enrolledCourses[i].getName()); // Accede a cada objeto Course en el array
+        }
+    }
+}
+```
+
+```Java
+public class Course {
+    private String name;
+
+    public Course(String name) {
+        this.name = name;
     }
 
-    // Setter para nombre (podría tener validación, ej. no vacío)
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getName() { return this.name; }
+}
+```
+
+### 2.2. Composición (Relación "Parte-Todo Fuerte")
+
+- La "parte" no existe lógicamente sin el "todo". Dependencia fuerte en ciclo de vida.
+- **Analogía**: Un `Order` (Pedido) compone `OrderItem[]` (Array de Ítems de Pedido). Los ítems específicos de un pedido solo existen como parte de ese pedido.
+- **Implementación en Java**: El Array de objetos "parte" a menudo **se crea e inicializa dentro del constructor o de un método del objeto "todo"**. El "todo" es responsable de la creación y gestión del ciclo de vida de las "partes" contenidas en el array.
+
+![Composición](assets/composicion.png)
+
+```Java
+public class OrderItem {
+    private String itemName;
+    private int quantity;
+    private double unitPrice;
+
+    public OrderItem(String itemName, int quantity, double unitPrice) {
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
     }
 
-    // Getter para edad
-    public int getEdad() {
-        return this.edad;
+    public double calculateSubtotal() {
+        return this.quantity * this.unitPrice;
     }
 
-    // Setter para edad con validación
-    public void setEdad(int edad) {
-        if (edad >= 0) {
-            this.edad = edad;
+    public String getItemName() { return this.itemName; }
+    public int getQuantity() { return this.quantity; }
+    public double getUnitPrice() { return this.unitPrice; }
+}
+```
+
+```Java
+public class Order {
+    private int orderNumber;
+    private OrderItem[] items; // Order HAS OrderItems (Composition using Array)
+
+    // The Order creates its own array of OrderItems
+    public Order(int orderNumber, int numberOfItems) {
+        this.orderNumber = orderNumber;
+        // Composition: The Order creates the array of its parts
+        this.items = new OrderItem[numberOfItems];
+        // The individual OrderItem objects still need to be created and added later
+         System.out.println("Pedido número " + this.orderNumber + " creado con espacio para " + numberOfItems + " ítems.");
+    }
+
+    // Method to add an item (simplified)
+    public void addItem(int index, OrderItem item) {
+        if (index >= 0 && index < this.items.length) {
+            this.items[index] = item;
+             System.out.println("Ítem '" + item.getItemName() + "' agregado al pedido en posición " + index);
         } else {
-            System.out.println("Error: Edad inválida.");
+             System.out.println("Índice inválido para agregar ítem.");
         }
     }
 
-    // Método de comportamiento
-    public void saludar() {
-        System.out.println("Hola, mi nombre es " + this.nombre + " y tengo " + this.edad + " años.");
+    public double calculateTotal() {
+        double total = 0;
+        // Iterate through the array to sum subtotals
+        for (int i = 0; i < this.items.length; i++) {
+            if (this.items[i] != null) { // Check if the element is not null
+                total += this.items[i].calculateSubtotal();
+            }
+        }
+        return total;
     }
 
+    public int getOrderNumber() { return this.orderNumber; }
+    public OrderItem[] getItems() { return this.items; } // Be careful returning internal arrays!
+}
+```
+
+### 2.3. Agregación (Relación "Parte-Todo Débil")
+
+- La "parte" puede existir independientemente del "todo". Dependencia débil en ciclo de vida.
+- **Analogía**: Un `Department` (Departamento) agrega `Employee[]` (Array de Empleados). Los empleados existen fuera del departamento y podrían trabajar en otro departamento.
+- **Implementación en Java**: El Array de objetos "parte" a menudo se **crea _fuera_ del objeto "todo" y se le pasa** (ej. al constructor o setter del "todo"). El "todo" simplemente mantiene referencias a estas "partes" que fueron creadas externamente.
+
+![Agregación](assets/agregacion.png)
+
+```Java
+public class Employee {
+    private String name;
+    private String id;
+
+    public Employee(String name, String id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() { return this.name; }
+    public String getId() { return this.id; }
+}
+```
+
+```Java
+public class Department {
+    private String name;
+    private Employee[] employees; // Department HAS Employees (Aggregation using Array)
+
+    // The array of Employees is passed FROM OUTSIDE
+    public Department(String name, Employee[] employees) {
+        this.name = name;
+        // Aggregation: The Department receives an array of externally created Employees
+        this.employees = employees;
+        System.out.println("Departamento '" + this.name + "' creado.");
+    }
+
+    public void displayEmployees() {
+        System.out.println("Empleados en " + this.name + ":");
+        // Iterate through the array
+        for (int i = 0; i < this.employees.length; i++) {
+            if (this.employees[i] != null) {
+                System.out.println("- " + this.employees[i].getName() + " (ID: " + this.employees[i].getId() + ")");
+            }
+        }
+    }
+
+    public String getName() { return this.name; }
+    public Employee[] getEmployees() { return this.employees; } // Be careful returning internal arrays!
+}
+```
+
+```Java
+public class CompanyApp {
     public static void main(String[] args) {
-        Persona p1 = new Persona("Ana", 25); // Crea objeto usando constructor
-        Persona p2 = new Persona("Juan", -5); // Intenta crear con edad inválida
+        // Employees are created independently
+        Employee emp1 = new Employee("Juan", "E001");
+        Employee emp2 = new Employee("Ana", "E002");
+        Employee emp3 = new Employee("Pedro", "E003");
 
-        p1.saludar(); // Salida: Hola, mi nombre es Ana y tengo 25 años.
-        p2.saludar(); // Salida: Error: Edad inválida. Hola, mi nombre es Juan y tengo 0 años. (edad se inicializa a 0 por defecto si el setter falla)
+        // Create an array of Employees
+        Employee[] itEmployees = {emp1, emp2}; // This array exists here
 
-        // Acceso y modificación controlada con getters y setters
-        System.out.println("Nombre de p1: " + p1.getNombre()); // Usa getter
-        p1.setEdad(26); // Usa setter válido
-        p1.setEdad(-10); // Usa setter inválido
+        // Create a Department and pass the existing array of Employees
+        Department itDept = new Department("IT", itEmployees); // Aggregation
 
-        // p1.edad = 30; // ERROR de compilación: El atributo 'edad' es privado
+        // Create another array for a different department
+        Employee[] salesEmployees = {emp3};
+        Department salesDept = new Department("Sales", salesEmployees); // Aggregation
+
+        itDept.displayEmployees();
+        salesDept.displayEmployees();
+
+        // If itDept object is removed, emp1 and emp2 still exist in memory
     }
 }
 ```
 
-```mermaid
-classDiagram
-    class Persona {
-        -String nombre
-        -int edad;
+### 2.4. Relaciones Bidireccionales y Restricciones
 
-        +Persona(String nombre, int edad)
+Ambas clases se conocen. Implementación con atributos de referencia en ambas clases. Gestión cuidadosa en constructores/setters. Las restricciones se implementan con lógica.
 
-        +String getNombre()
-        +void setNombre(String nombre)
-        +int getEdad()
-        +void setEdad(int edad)
-        
-        +void saludar()
-    }
-```
+## 3. Abstracción con Clases Abstractas y Interfaces
 
-## 6. Ejercicio Práctico en Clase: Creando y Usando Objetos Encapsulados
+Ya introdujimos las clases abstractas y las interfaces como herramientas para la abstracción. Ahora, veamos cómo se usan estratégicamente en el diseño de sistemas con relaciones.
 
-Ahora, vamos a aplicar los conceptos de clase, objeto, constructor y encapsulamiento creando una clase simple y utilizándola.
+### 3.1. Clases Abstractas
 
-**Objetivo del Ejercicio**: Crear una clase `Libro`, definir sus atributos, usar un constructor para crear objetos `Libro`, y mostrar su información de forma segura utilizando métodos de acceso (getters).
-
-### Crear la Clase `Libro`
-
-Crea un nuevo archivo Java llamado `Libro.java`. Asegúrate de que no tenga un método `main` por ahora; solo la definición de la clase.
+- Se usan para definir una base común para clases relacionadas en una jerarquía "es un tipo de", cuando la clase base no tiene sentido ser instanciada por sí sola, o cuando tiene métodos que deben ser implementados de forma específica por las subclases.
+- Pueden tener atributos (estado), métodos concretos (con implementación) y **métodos abstractos** (sin implementación).
+- Las subclases **concretas** (no abstractas) que extienden una clase abstracta **deben** implementar todos sus métodos abstractos.
+- Son útiles cuando tienes una implementación parcial que quieres compartir.
+- **Uso con Arrays**: Puedes tener un array de referencias a una clase abstracta para almacenar objetos de cualquiera de sus subclases concretas, aprovechando el polimorfismo.
 
 ```Java
-public class Libro {
-    // Aquí irán los atributos
-    // Aquí irán los constructores
-    // Aquí irán los métodos (getters/setters, otros comportamientos)
+// Abstract class: Represents a generic Shape
+public abstract class Shape {
+    private String color;
+
+    public Shape(String color) {
+        this.color = color;
+    }
+
+    public String getColor() { return this.color; }
+
+    // Abstract methods: Must be implemented by concrete subclasses
+    public abstract double calculateArea();
+    public abstract double calculatePerimeter();
 }
 ```
 
-### Definir Atributos (Privados)
-
-Dentro de la clase `Libro`, declara los siguientes atributos. Hazlos **privados** para aplicar el encapsulamiento.
-
-- `titulo` (tipo `String`)
-- `autor` (tipo `String`)
-- `isbn` (tipo `String`)
-- `precio` (tipo `double`)
-
 ```Java
-public class Libro {
-    private String titulo;
-    private String autor;
-    private String isbn;
-    private double precio;
+// Concrete subclass
+public class Circle extends Shape {
+    private double radius;
 
-    // ... resto de la clase ...
-}
-```
-
-### Crear un Constructor Parametrizado
-
-Crea un constructor para la clase `Libro` que acepte parámetros para inicializar todos los atributos al crear un objeto. Utiliza la palabra clave `this`.
-
-```Java
-public class Libro {
-    private String titulo;
-    private String autor;
-    private String isbn;
-    private double precio;
-
-    // Constructor
-    public Libro(String titulo, String autor, String isbn, double precio) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.isbn = isbn;
-        this.precio = precio;
+    public Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
     }
 
-    // ... resto de la clase ...
-}
-```
-
-### Implementar Getters (Métodos de Acceso)
-
-Crea métodos públicos (**getters**) para permitir que otras clases puedan obtener el valor de cada atributo privado.
-
-```Java
-public class Libro {
-    private String titulo;
-    private String autor;
-    private String isbn;
-    private double precio;
-
-    // Constructor
-    public Libro(String titulo, String autor, String isbn, double precio) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.isbn = isbn;
-        this.precio = precio;
+    @Override
+    public double calculateArea() {
+        return Math.PI * this.radius * this.radius;
     }
 
-    // Getters
-    public String getTitulo() {
-        return this.titulo;
-    }
-
-    public String getAutor() {
-        return this.autor;
-    }
-
-    public String getIsbn() {
-        return this.isbn;
-    }
-
-    public double getPrecio() {
-        return this.precio;
-    }
-
-    // ... resto de la clase ...
-}
-```
-
-_(Opcional: Si el tiempo permite, discute brevemente la idea de setters y cómo se añadirían, quizás con una validación simple para el precio, pero sin implementarlos completamente si el tiempo es limitado)._
-
-### Crear la Clase Principal con `main`
-
-Crea un nuevo archivo Java llamado `BibliotecaApp.java` (o similar). Este archivo sí tendrá el método `main`.
-
-```Java
-public class BibliotecaApp {
-    public static void main(String[] args) {
-        // Aquí crearemos y usaremos objetos Libro
+    @Override
+    public double calculatePerimeter() {
+        return 2 * Math.PI * this.radius;
     }
 }
 ```
 
-### Crear Objetos `Libro` en `main`
-
-Dentro del método `main` de `BibliotecaApp.java`, crea al menos dos objetos de la clase `Libro` utilizando el constructor que definiste.
-
 ```Java
-public class BibliotecaApp {
-    public static void main(String[] args) {
-        // Crear objetos Libro usando el constructor
-        Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", "978-0307474278", 15.99);
-        Libro libro2 = new Libro("1984", "George Orwell", "978-0451524935", 9.50);
+// Class that holds an array of abstract class references
+public class Drawing {
+    private Shape[] shapes; // Drawing HAS Shapes (Composition or Aggregation, depending on creation)
 
-        // ... mostrar información ...
+    public Drawing(int maxShapes) {
+        // Composition if drawing creates the array
+        this.shapes = new Shape[maxShapes];
+        System.out.println("Dibujo creado con espacio para " + maxShapes + " figuras.");
+    }
+
+    // Method to add a shape (accepts any object that is a Shape)
+    public void addShape(int index, Shape shape) {
+         if (index >= 0 && index < this.shapes.length) {
+            this.shapes[index] = shape;
+             System.out.println("Figura agregada al dibujo en posición " + index);
+        } else {
+             System.out.println("Índice inválido para agregar figura.");
+        }
+    }
+
+    public void displayAreas() {
+        System.out.println("Áreas de las figuras en el dibujo:");
+        // Iterate and call calculateArea() polymorphically
+        for (int i = 0; i < this.shapes.length; i++) {
+            if (this.shapes[i] != null) {
+                // The correct calculateArea() method is called based on the actual object type (Circle, etc.)
+                System.out.printf("- Área: %.2f%n", this.shapes[i].calculateArea());
+            }
+        }
     }
 }
 ```
 
-### Mostrar Información de Forma Segura (Usando Getters)
+En el ejemplo anterior, `Drawing` tiene un array de `Shape`. Puedes poner cualquier subclase concreta de `Shape` (como `Circle`) en ese array, y al llamar a `calculateArea()`, Java ejecutará el método correcto para el objeto específico en esa posición del array.
 
-- Desde el método `main`, accede a la información de los objetos `libro1` y `libro2` utilizando los **métodos getter** que creaste en la clase Libro.
-- Imprime la información de cada libro en la consola de forma legible, quizás usando `System.out.printf()` para formatear el precio.
+### 3.2. Interfaces
+
+- Se usan para definir un contrato de comportamiento. Especifican _qué_ debe hacer una clase, pero no _cómo_.
+- Todos los métodos abstractos son implícitamente `public abstract`. Las variables son `public static final`.
+- Una clase que implementa una interfaz **debe** proporcionar implementación para todos sus métodos abstractos.
+- Son útiles para definir capacidades que clases potencialmente no relacionadas pueden compartir (ej. `Flyable`, `Swimmable`). Permiten la implementación múltiple.
+- **Uso con Arrays**: Similar a las clases abstractas, puedes tener un array de referencias a una interfaz para almacenar objetos de cualquiera de las clases que implementan esa interfaz, aprovechando el polimorfismo.
 
 ```Java
-public class BibliotecaApp {
-    public static void main(String[] args) {
-        Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", "978-0307474278", 15.99);
-        Libro libro2 = new Libro("1984", "George Orwell", "978-0451524935", 9.50);
+// Interface: Defines a contract for anything that can make a sound
+public interface SoundEmitter {
+    void makeSound(); // Implícitamente public abstract
+}
+```
 
-        System.out.println("--- Información de Libros ---");
+```Java
+// Class implementing the interface
+public class Dog implements SoundEmitter {
+    private String name;
 
-        // Mostrar información del libro 1 usando getters
-        System.out.println("Libro 1:");
-        System.out.println("  Título: " + libro1.getTitulo());
-        System.out.println("  Autor: " + libro1.getAutor());
-        System.out.println("  ISBN: " + libro1.getIsbn());
-        System.out.printf("  Precio: $%.2f%n", libro1.getPrecio()); // Formatear precio
+    public Dog(String name) {
+        this.name = name; 
+    }
 
-        System.out.println("\nLibro 2:");
-        System.out.println("  Título: " + libro2.getTitulo());
-        System.out.println("  Autor: " + libro2.getAutor());
-        System.out.println("  ISBN: " + libro2.getIsbn());
-        System.out.printf("  Precio: $%.2f%n", libro2.getPrecio()); // Formatear precio
+    @Override public void makeSound() { System.out.println(this.name + " dice: ¡Guau guau!"); }
+}
+```
 
-        // Intenta acceder directamente a un atributo privado (mostrará error de compilación)
-        // System.out.println(libro1.titulo); // ERROR!
-
-        System.out.println("-----------------------------");
+```Java
+// Another class implementing the same interface (not related by inheritance to Dog)
+public class CarAlarm implements SoundEmitter {
+    @Override 
+    public void makeSound() {
+        System.out.println("La alarma del coche suena: ¡Bip bip bip!");
     }
 }
 ```
 
-### Compilar y Ejecutar
-
-- Compila ambos archivos (`Libro.java` y `BibliotecaApp.java`). Puedes hacerlo desde la terminal navegando a la carpeta y ejecutando `javac Libro.java BibliotecaApp.java`.
-- Ejecuta el programa principal: `java BibliotecaApp`.
-- Verifica que la información de los libros se muestra correctamente en la consola.
-
-### Mejoras que se pueden aplicar al ejercicio (Opcional)
-
-#### 1. Método adicional a la clase `Libro`
-
-Agregar un método que permita mostrar la información del libro directamente desde la clase `Libro`.
-
 ```Java
-public void mostrarInformacion() {
-    System.out.println("  Título: " + this.titulo);
-    System.out.println("  Autor: " + this.autor);
-    System.out.println("  ISBN: " + this.isbn);
-    System.out.printf("  Precio: $%.2f%n", this.precio);
-}
-```
+// Class that holds an array of interface references
+public class SoundSystem {
+    private SoundEmitter[] emitters; // SoundSystem HAS SoundEmitters (Aggregation or Composition)
 
-Asi, el llamado desde el main cambiaría por:
-
-```Java
-public class BibliotecaApp {
-    public static void main(String[] args) {
-        Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", "978-0307474278", 15.99);
-        Libro libro2 = new Libro("1984", "George Orwell", "978-0451524935", 9.50);
-
-        System.out.println("--- Información de Libros ---");
-
-        // Mostrar información del libro 1 usando getters
-        System.out.println("Libro 1:");
-        libro1.mostrarInformacion();
-
-        System.out.println("\nLibro 2:");
-        libro2.mostrarInformacion();
-
-        System.out.println("-----------------------------");
+    public SoundSystem(int maxEmitters) {
+        this.emitters = new SoundEmitter[maxEmitters];
+         System.out.println("Sistema de sonido creado con espacio para " + maxEmitters + " emisores.");
     }
-```
 
-#### 2. Ejemplo de Validación en un Setter
+    // Method to add an emitter (accepts any object implementing SoundEmitter)
+    public void addEmitter(int index, SoundEmitter emitter) {
+         if (index >= 0 && index < this.emitters.length) {
+            this.emitters[index] = emitter;
+             System.out.println("Emisor de sonido agregado en posición " + index);
+        } else {
+             System.out.println("Índice inválido para agregar emisor.");
+        }
+    }
 
-Aunque los setters son opcionales en este punto, podríamos incluir un ejemplo de cómo validar un atributo, como el precio, para reforzar la importancia del control de acceso.
-
-```Java
-public void setPrecio(double precio) {
-    if (precio > 0) {
-        this.precio = precio;
-    } else {
-        System.out.println("El precio debe ser mayor a 0.");
+    public void activateAll() {
+        System.out.println("Activando todos los emisores de sonido:");
+        // Iterate and call makeSound() polymorphically
+        for (int i = 0; i < this.emitters.length; i++) {
+            if (this.emitters[i] != null) {
+                // The correct makeSound() method is called based on the actual object type (Dog, CarAlarm, etc.)
+                this.emitters[i].makeSound();
+            }
+        }
     }
 }
 ```
 
-#### 3. Comparar Objetos
+En este caso, `SoundSystem` tiene un array de `SoundEmitter`. Puedes poner cualquier objeto que implemente `SoundEmitter` (como `Dog` o `CarAlarm`) en ese array, y al llamar a `makeSound()`, se ejecutará la implementación específica de cada objeto.
 
-Podríamos incluir un método donde se comparen dos objetos `Libro` para verificar si tienen el mismo `ISBN`, reforzando la idea de que los objetos tienen atributos únicos.
+### 4. Ejercicio Práctico en Clase: Modelando un Sistema Básico de Restaurante
 
-```Java
-public boolean esMismoLibro(Libro otroLibro) {
-    return this.isbn.equals(otroLibro.getIsbn());
-}
-```
+Este ejercicio se realizará de forma guiada en clase para aplicar los conceptos de modelado de clases, relaciones (Asociación, Composición, Agregación), encapsulamiento, constructores, abstracción y **Arrays**.
+
+**Objetivo del Ejercicio**: Diseñar y codificar las clases principales para un sistema simplificado de gestión de un restaurante, enfocándose en las relaciones entre ellas y utilizando Arrays para representar colecciones.
+
+**Reglas de Codificación**: Escribe el código en **inglés**. Los comentarios dentro del código y los mensajes de salida en consola (`System.out.println`, `printf`) deben estar en **español**.
+
+### Identificar las Entidades Principales
+
+Discutir con los estudiantes qué "cosas" o conceptos son importantes en un sistema de restaurante (Restaurante, Mesa, Pedido, Ítem del Menú, Ítem del Pedido, Empleado/Mesero).
+
+### Crear la Clase `Restaurant`
+
+- **Atributos privados**: `name` (String), `address` (String).
+- **Relación con Mesas (Agregación)**: Añade un atributo `private Table[] tables;`. El restaurante _agrega_ mesas que existen independientemente. Pasa un Array de objetos `Table` al constructor del `Restaurant`.
+- **Relación con Empleados (Agregación)**: Añade un atributo `private Employee[] employees;`. Pasa un Array de objetos `Employee` al constructor.
+- **Relación con Menú (Composición o Agregación)**: Crea una clase `Menu`. Decide si el `Menu` _compone_ el `Restaurant` o es _agregado_. Implementa la relación con un atributo `private Menu menu;`. Si es composición, crea el `Menu` dentro del constructor del `Restaurant`. Si es agregación, pásalo al constructor.
+- Constructor que inicialice los atributos y reciba los Arrays de `Table` y `Employee` y el objeto `Menu`.
+- Getters para todos los atributos.
+- Método `displayMenu()`: Llama al método `displayItems()` del objeto `Menu`.
+- Método `findTable(int tableNumber)`: Recorre el array `tables` y retorna la `Table` con el número especificado, o `null` si no se encuentra.
+
+### Crear la Clase `Table`
+
+- **Atributos privados**: `tableNumber` (int), `capacity` (int), `isOccupied` (boolean - inicialmente false).
+- **Relación con Pedido (Asociación)**: Añade un atributo `private Order currentOrder;`. Una mesa _tiene un_ pedido actual. Implementa la relación.
+- Constructor.
+- Getters.
+- Setter para `isOccupied`.
+- Método `assignOrder(Order order)`: Asigna un `Order` a `currentOrder` y setea `isOccupied` a `true`.
+- Método `clearTable()`: Setea `isOccupied` a `false` y `currentOrder` a `null`.
+- Método `getCurrentOrder()`: Retorna el `currentOrder`.
+
+### Crear la Clase `MenuItem`
+
+- **Atributos privados**: `name` (String), `price` (double).
+- Constructor.
+- Getters.
+
+### Crear la Clase `OrderItem`
+
+- **Atributos privados**: `menuItem` (una referencia a un objeto `MenuItem`), `quantity` (int).
+- Constructor que reciba un `MenuItem` y una `quantity`.
+- Getters.
+- Método `calculateSubtotal()` que retorne el precio del `MenuItem` por la `quantity`.
+
+### Crear la Clase `Order`
+
+- **Atributos privados**: `orderNumber` (int), `status` (String - ej. "Pending", "In Progress", "Delivered").
+- `Relación con Ítems del Pedido (Composición)`: Añade un atributo `private OrderItem[] items;`. El pedido _compone_ ítems. El Array `items` debe ser **creado dentro del constructor** de `Order`, recibiendo el tamaño máximo de ítems.
+- Constructor que inicialice el número y estado, y cree el array `items` con un tamaño dado.
+- Método `addItem(OrderItem item)`: Añade un `OrderItem` al array `items` en la primera posición `null` disponible. Debe manejar el caso de que el array esté lleno.
+- Getters.
+- Método `calculateTotal()`: Itera sobre el array `items`, suma el subtotal de cada `OrderItem` (verificando que no sea `null`) y retorna el total.
+- Método `displayDetails()`: Imprime el número del pedido, estado y los detalles de cada ítem en el array `items`.
+
+### Crear la Clase `Menu`
+
+- **Atributos privados**: name (String).
+- **Relación con Ítems del Menú (Agregación)**: Añade un atributo `private MenuItem[] items;`. El menú _agrega_ ítems. El Array `items` debe ser **pasado al constructor** de `Menu`.
+- Constructor que inicialice el nombre y reciba un Array de `MenuItem`s.
+- Getters.
+- Método `displayItems()`: Itera sobre el array `items` e imprime los detalles de cada `MenuItem`.
+- Método `findItem(String itemName)`: Recorre el array `items` y retorna el `MenuItem` con el nombre especificado, o `null` si no se encuentra.
+
+### Crear la Clase `Employee`
+
+- **Atributos privados**: `name` (String).
+- Constructor.
+- Getter.
+
+### Clase Principal (`main`)
+
+- Crea una clase principal (ej. `RestaurantApp.java`) con un método `main`.
+- Dentro de `main`:
+  - Crea algunos objetos `MenuItem`.
+  - Crea un Array de `MenuItem`s y úsalo para crear un objeto `Menu`.
+  - Crea un Array de objetos `Table` y úsalo para crear un objeto `Restaurant`.
+  - Crea un Array de objetos `Employee` y úsalo para crear el mismo objeto `Restaurant`.
+  - Llama a `restaurant.displayMenu()`.
+  - Crea un objeto `Order`, especificando un tamaño máximo de ítems (ej. 5).
+  - Busca `MenuItem`s en el `Menu` (usando `menu.findItem()`) y úsalos para crear objetos `OrderItem`.
+  - Añade los `OrderItem`s al `Order` (usando `order.addItem()`).
+  - Busca una `Table` en el `Restaurant` (usando `restaurant.findTable()`) y asigna el `Order` a esa `Table`.
+  - Llama a `order.displayDetails()` y `order.calculateTotal()`.
+  - Demuestra la relación bidireccional si la implementaste (ej. desde el pedido, acceder a la mesa si es posible).
