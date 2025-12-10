@@ -195,3 +195,211 @@ Finaliza el programa.
 ├── README.md
 └── .gitignore
 
+# Ejemplo de Ejecución del Mini-Spotify (Simulación por Consola)
+
+A continuación se presenta una simulación completa del funcionamiento de
+la aplicación Mini-Spotify en consola. El objetivo es mostrar cómo se
+visualizan los menús, la interacción del usuario y el flujo general del
+sistema una vez implementado.
+
+    === MINI-SPOTIFY ===
+    1. Iniciar sesión
+    2. Gestionar Biblioteca Musical
+    3. Gestionar Playlists
+    4. Reproducir Canciones
+    5. Cerrar sesión
+    6. Salir del programa
+    Seleccione una opción: 1
+
+    --- INICIAR SESIÓN ---
+    Usuario: enrique
+    Contraseña: 1234
+    Inicio de sesión exitoso. Bienvenido, enrique.
+
+
+    === MINI-SPOTIFY ===
+    1. Iniciar sesión
+    2. Gestionar Biblioteca Musical
+    3. Gestionar Playlists
+    4. Reproducir Canciones
+    5. Cerrar sesión
+    6. Salir del programa
+    Seleccione una opción: 2
+
+    --- GESTIÓN DE BIBLIOTECA ---
+    1. Listar canciones
+    2. Agregar canción
+    3. Buscar por nombre
+    4. Volver
+    Seleccione: 1
+
+    --- LISTA DE CANCIONES EN BIBLIOTECA ---
+    [0] Shape of You - Ed Sheeran (240s)
+    [1] Believer - Imagine Dragons (210s)
+    [2] Thunderstruck - AC/DC (290s)
+    [3] Someone Like You - Adele (300s)
+    ------------------------------------------
+    Total: 4 canciones
+
+    Presione ENTER para continuar...
+
+
+    --- GESTIÓN DE BIBLIOTECA ---
+    1. Listar canciones
+    2. Agregar canción
+    3. Buscar por nombre
+    4. Volver
+    Seleccione: 2
+
+    --- AGREGAR CANCIÓN ---
+    Título: Perfect
+    Artista: Ed Sheeran
+    Duración en segundos: 263
+    Canción agregada exitosamente a la biblioteca.
+
+    Presione ENTER para continuar...
+
+
+    --- GESTIÓN DE BIBLIOTECA ---
+    1. Listar canciones
+    2. Agregar canción
+    3. Buscar por nombre
+    4. Volver
+    Seleccione: 3
+
+    --- BUSCAR CANCIÓN ---
+    Ingrese nombre o fragmento: Thunder
+    Resultado encontrado:
+    Thunderstruck - AC/DC (290s)
+
+    Presione ENTER para continuar...
+
+    Volviendo al menú principal...
+
+
+    === MINI-SPOTIFY ===
+    1. Iniciar sesión
+    2. Gestionar Biblioteca Musical
+    3. Gestionar Playlists
+    4. Reproducir Canciones
+    5. Cerrar sesión
+    6. Salir del programa
+    Seleccione una opción: 3
+
+    --- GESTIÓN DE PLAYLISTS ---
+    1. Crear playlist
+    2. Listar playlists
+    3. Agregar canción a playlist
+    4. Ver canciones de una playlist
+    5. Volver
+    Seleccione: 1
+
+    --- CREAR PLAYLIST ---
+    Ingrese nombre: Favoritas 2025
+    Playlist creada correctamente.
+
+    Presione ENTER para continuar...
+
+
+    --- GESTIÓN DE PLAYLISTS ---
+    1. Crear playlist
+    2. Listar playlists
+    3. Agregar canción a playlist
+    4. Ver canciones de una playlist
+    5. Volver
+    Seleccione: 3
+
+    --- AGREGAR CANCIÓN A PLAYLIST ---
+    Nombre de la playlist: Favoritas 2025
+    Seleccione canción del catálogo:
+
+    [0] Shape of You - Ed Sheeran
+    [1] Believer - Imagine Dragons
+    [2] Thunderstruck - AC/DC
+    [3] Someone Like You - Adele
+    [4] Perfect - Ed Sheeran
+
+    Ingrese índice de canción: 0
+    Canción agregada correctamente a la playlist.
+
+    Presione ENTER para continuar...
+
+
+    --- GESTIÓN DE PLAYLISTS ---
+    1. Crear playlist
+    2. Listar playlists
+    3. Agregar canción a playlist
+    4. Ver canciones de una playlist
+    5. Volver
+    Seleccione: 4
+
+    --- VER CANCIONES EN PLAYLIST ---
+    Playlist: Favoritas 2025
+    [0] Shape of You - Ed Sheeran (240s)
+    ------------------------------------------
+    Total: 1 canción
+
+    Presione ENTER para continuar...
+
+
+    Volviendo al menú principal...
+
+    === MINI-SPOTIFY ===
+    1. Iniciar sesión
+    2. Gestionar Biblioteca Musical
+    3. Gestionar Playlists
+    4. Reproducir Canciones
+    5. Cerrar sesión
+    6. Salir del programa
+    Seleccione una opción: 4
+
+    --- REPRODUCCIÓN ---
+    1. Reproducir canción desde playlist
+    2. Detener reproducción
+    3. Volver
+    Seleccione: 1
+
+    --- REPRODUCIR DESDE PLAYLIST ---
+    Nombre de la playlist: Favoritas 2025
+    Canciones disponibles:
+    [0] Shape of You - Ed Sheeran
+
+    Ingrese índice de canción: 0
+
+    Reproduciendo...
+    ♪ Shape of You - Ed Sheeran (duración: 240s)
+
+    Presione ENTER para continuar...
+
+    --- REPRODUCCIÓN ---
+    1. Reproducir canción desde playlist
+    2. Detener reproducción
+    3. Volver
+    Seleccione: 2
+
+    Reproducción detenida.
+
+
+    Volviendo al menú principal...
+
+    === MINI-SPOTIFY ===
+    1. Iniciar sesión
+    2. Gestionar Biblioteca Musical
+    3. Gestionar Playlists
+    4. Reproducir Canciones
+    5. Cerrar sesión
+    6. Salir del programa
+    Seleccione una opción: 5
+
+    Sesión cerrada.
+
+    === MINI-SPOTIFY ===
+    1. Iniciar sesión
+    2. Gestionar Biblioteca Musical
+    3. Gestionar Playlists
+    4. Reproducir Canciones
+    5. Cerrar sesión
+    6. Salir del programa
+    Seleccione una opción: 6
+
+    Gracias por usar Mini-Spotify. ¡Hasta pronto!
